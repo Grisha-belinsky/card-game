@@ -1,0 +1,73 @@
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+
+</head>
+
+<body background="woodbg.gif">
+<h1 style="text-align:center;"><b>Game of War</b></h1>
+
+<div class='container'>
+    <strong><h3 style="color: black"  class="pull-right">Login as <%= users[1].rows[1].userName %></h3> </strong>
+    <div id="playersDiv">
+        <h2>Number of players</h2>
+        <br>
+        <table style="color:green;">
+
+            <tr>
+                <td><%= users[1].rows[1].userName %></td>
+            </tr>
+
+        </table>
+        <input type="hidden" name="players" class="form-control" value="<%= users.length %>" id="players"/>
+        <input type="hidden" name="players" class="form-control" value="<%= users %>" id="names"/>
+        <br/><br>
+        <div class="row row-centered">
+            <button class="btn btn-lg btn-primary" id="start">Start</button>
+        </div><br/>
+
+
+    </div><br>
+    <div class="row row-centered">
+        <div id="cards-container">
+
+        </div><br/>
+    </div><br>
+    <div class="row row-centered">
+
+        <div id="game_history"  >
+            <h2>Game History</h2>
+            <% for(var i=0; i < users[1].rows.length; i++) { %>
+
+            <tr>
+                <td><%= users[1].rows[i]['histories.history'] %></td>
+            </tr>
+            <br/>
+            <% } %>
+
+
+        </div><br/>
+    </div>
+</div>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" ></script>
+<script src="/socket.io/socket.io.js"></script>
+
+<script type="text/javascript">
+    var arr = [];
+    var triggerFlag = false;
+    <% for(var i=0; i < users.length; i++) { %>
+    arr.push('<%= users[i].rows[0].userName %>')
+    <% } %>
+    var socket = io.connect('http://localhost:3002');
+
+    console.log("sssssssssssssssssssss");
+    console.log(arr);
+
+
+</script>
+
+<script type="text/javascript" src='dist/bundle.js'></script>
+</body>
+
+</html>
